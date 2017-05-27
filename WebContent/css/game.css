@@ -56,8 +56,6 @@ body {
 
 #finalResult {
 	display: none;
-	position: absolute;
-	top: 150px;
 	background-color: rgba(50, 50, 50, 0.5);
 	color: white;
 	font-size: 30pt; 

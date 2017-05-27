@@ -90,7 +90,7 @@ function callResult() {
     };
     $.ajax({
         type: "post",
-        url : "./raceResult.jsp?ver=2",
+        url : "./raceResult.jsp?ver=1",
         data: {
         	result:JSON.stringify(players)
         },
@@ -99,7 +99,6 @@ function callResult() {
  	});
    
 function whenSuccess(resdata){
-	
 	 $("#finalResult").show("fade", 2000, function(){
 		 $("#finalResult").html(resdata);
 	 });
@@ -110,53 +109,6 @@ function whenError(){
 }
 
     
-    /*$("#game")
-        .hide(
-            "fade",
-            2000,
-            function() {
-                $("body").css("background-image",
-                    "url('img/jackpot_bg.jpg')");
-
-                $("#finalResult").html(
-                    "<img src=\"img/prize.png\"><span>" +
-                    player[0].id +
-                    " Win!!! Congratulations!!" +
-                    "</span>");
-                $("#finalResult")
-                    .append(
-                        "<table class=\"table table-condesed\"id=\"playerStatus\" align=\"center\"><tbody></tbody></table>");
-                $("#finalResult").show("fade", {
-                    direction: "down"
-                }, 1000);
-                var idx = 0;
-                window.setTimeout(function() {}, 2000);
-                var showList = window.setInterval(function() {
-                    if (idx > 4) {
-                        $("#playerStatus > tbody:last").append("<br><button type=\"button\" " +
-                        		"class=\"col-md-4 col-md-offset-8 col-sm-offset-8 col-sm-5 btn btn-primary btn-lg\" " +
-                        		"id=\"restartBtn\" " +
-                        		"onclick=\"window.location.reload()\">" +
-                        		"�뜝�럥堉꾢뜝�럥六삣뜝�럥由��뼨�먯삕" +
-                        		"</button>");
-                        clearInterval(showList);
-                    } else {
-                        $("#playerStatus > tbody:last")
-                            .append(
-                                "<tr><td>" +
-                                ((idx < 3) ? "<img src=\"img/" +
-                                    idx +
-                                    ".png\" class=\"medal\">&nbsp;&nbsp;" :
-                                    "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;") +
-                                player[idx].id +
-                                "</td><td>" +
-                                player[idx].curMoney +
-                                "</td></tr>");
-                        $("#playerStatus").show("fade", 1000);
-                        idx++;
-                    }
-                }, 1200);
-            });*/
 
 }
 
@@ -177,7 +129,6 @@ function betting() {
         alert("Not enough money!");
     }
     return false;
-
 }
 
 function calRank() {
@@ -196,13 +147,12 @@ function giveBackMoney(winner) {
     console.log("winner : " + winner);
     $.each(player, function(index, item) {
         if (item.hnum == winner) {
-            item.curMoney = (item.playerBetMoney) *
-                horses[item.hnum - 1].win_ratio + item.curMoney;
+        	item.benefit=parseInt((item.playerBetMoney) * horses[item.hnum - 1].win_ratio) ;
         } else {
-            item.curMoney-= item.playerBetMoney;
+        	item.benefit=-parseInt(item.playerBetMoney);
         }
+        item.curMoney = item.benefit + item.curMoney;
     })
-    console.log(player);
     /*
      * console.log("Betting Money : "+player[0].playerBetMoney);
      * console.log("Total Money : "+player[0].myMoney);

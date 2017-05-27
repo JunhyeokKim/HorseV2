@@ -60,13 +60,17 @@ body {
 	JSONObject winnerObj = (JSONObject) playerArray.get(0);
 	
 	%>
-	<h2><%=winnerObj.get("id") %> Win!! Congratulations!! </h2>
-	<table class="table co-md-offset-3 col-md-5">
+	<br>
+	<h1>Game Result</h1>
+	<br>
+	
+	<table class="table">
 		<tr>
 		<td></td>
 			<td>ID</td>
-			<td>금액</td>
-			<td>내가 건 돈</td>
+			<td>Betting money</td>
+			<td>수익</td>
+			<td>최종 금액</td>
 			<td>선택한 말</td>
 		</tr>
 		<%
@@ -88,8 +92,9 @@ body {
 				<%
 					}
 				%><td><%=playerObject.get("id")%></td>
+				<td><%=playerObject.get("playerBetMoney")%></td>
+			<td><%=playerObject.get("benefit")%></td>
 			<td><%=playerObject.get("curMoney")%></td>
-			<td><%=playerObject.get("playerBetMoney")%></td>
 			<td><%=playerObject.get("hnum")%></td>
 		</tr>
 		<%
@@ -101,63 +106,14 @@ body {
 			}
 		%>
 	</table>
-	<button type="button" class="btn btn-primary" onclick=window.location.reload()>다시 하기</button>
+	<button type="button" class="btn btn-primary btn-lg" onclick=window.location.reload()>다시 하기</button>
 </body>
 <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1 "></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js?ver=1"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-
-		/* 
-			 $("body").css("background-image",
-			 "url('img/jackpot_bg.jpg')");
-
-			 $("#finalResult").html(
-			 "<img src=\"img/prize.png\"><span>"
-			 + player[0].id
-			 + " Win!!! Congratulations!!"
-			 + "</span>");
-			 $("#finalResult")
-			 .append(
-			 "<table class=\"table table-condesed\"id=\"playerStatus\" align=\"center\"><tbody></tbody></table>");
-			 $("#finalResult").show("fade", {
-			 direction : "down"
-			 }, 1000);
-			 var idx = 0;
-			 window.setTimeout(function() {
-			 }, 2000);
-			 var showList = window
-			 .setInterval(
-			 function() {
-			 if (idx > 4) {
-			 $("#playerStatus > tbody:last")
-			 .append(
-			 "<br><button type=\"button\" "
-			 + "class=\"col-md-4 col-md-offset-8 col-sm-offset-8 col-sm-5 btn btn-primary btn-lg\" "
-			 + "id=\"restartBtn\" "
-			 + "onclick=\"window.location.reload()\">"
-			 + "다시하기"
-			 + "</button>");
-			 clearInterval(showList);
-			 } else {
-			 $("#playerStatus > tbody:last")
-			 .append(
-			 "<tr><td>"
-			 + ((idx < 3) ? "<img src=\"img/" +
-                            idx +
-                            ".png\" class=\"medal\">&nbsp;&nbsp;"
-			 : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-			 + player[idx].id
-			 + "</td><td>"
-			 + player[idx].curMoney
-			 + "</td></tr>");
-			 $("#playerStatus").show("fade",
-			 1000);
-			 idx++;
-			 }
-			 }, 1200); */
+	$(document).ready(function(){
 
 	})
 </script>
