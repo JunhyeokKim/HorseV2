@@ -85,7 +85,6 @@ function start() {
 function callResult() {
     calRank();
     $("#gameResult").hide("fade", 1000);
-    $("#finalResult").show("fade", 2000);
     var players={
     		playersInfo:player
     };
@@ -100,7 +99,10 @@ function callResult() {
  	});
    
 function whenSuccess(resdata){
-	 $("#finalResult").html(resdata);
+	
+	 $("#finalResult").show("fade", 2000, function(){
+		 $("#finalResult").html(resdata);
+	 });
 	 console.log(resdata);
     }
 function whenError(){
@@ -135,7 +137,7 @@ function whenError(){
                         		"class=\"col-md-4 col-md-offset-8 col-sm-offset-8 col-sm-5 btn btn-primary btn-lg\" " +
                         		"id=\"restartBtn\" " +
                         		"onclick=\"window.location.reload()\">" +
-                        		"占쎈뼄占쎈뻻占쎈릭疫뀐옙" +
+                        		"�뜝�럥堉꾢뜝�럥六삣뜝�럥由��뼨�먯삕" +
                         		"</button>");
                         clearInterval(showList);
                     } else {

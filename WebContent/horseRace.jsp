@@ -24,7 +24,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css">
-<link href="css/game.css?ver=2" rel="stylesheet" type="text/css">
+<link href="css/game.css?ver=3" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/jquery-ui.css">
 <title>justification</title>
 </head>
@@ -34,11 +34,6 @@
 	PlayerInfo sch = dao.checkDuplicatedId(vo.getPid());
 	PlayerInfo dump = new PlayerInfo();
 	ArrayList<PlayerInfo> playerList = dao.searchPlayer(dump);
-		for (int i=0; i<playerList.size(); i++) {
-			if (playerList.get(i).getPid().equals(vo.getPid())) {
-				playerList.remove(i);
-			}
-		}
 	session.setAttribute("playerList", playerList);
 	session.setAttribute("user", sch);
 %>
@@ -178,7 +173,13 @@
 		<input type="hidden" id="gameState" />
 	</div>
 
-
+<%
+for (int i=0; i<playerList.size(); i++) {
+	if (playerList.get(i).getPid().equals(vo.getPid())) {
+		playerList.remove(i);
+	}
+}
+%>
 
 </body>
 <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1 "></script>

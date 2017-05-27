@@ -23,7 +23,6 @@
 <!-- Custom Fonts -->
 <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
-<link href="css/game.css?ver=2" rel="stylesheet" type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
 	rel="stylesheet" type="text/css">
@@ -42,7 +41,6 @@ body {
 
 	String result = (request.getParameter("result") != null) ? request.getParameter("result") : "";
 	System.out.println("result: " + result);
-	String winner = "";
 	try {
 		JSONParser jsonParser = new JSONParser();
 		//JSON데이터를 넣어 JSON Object 로 만들어 준다.
@@ -57,21 +55,26 @@ body {
 	<h1><%=playerObject.get("curMoney")%></h1>
 	<h1><%=playerObject.get("playerBetMoney")%></h1>
 	<h1><%=playerObject.get("hnum")%></h1> --%>
-	<table class="table table-bordered">
+	<%
+	PlayerInfo upt = new PlayerInfo();
+	JSONObject winnerObj = (JSONObject) playerArray.get(0);
+	
+	%>
+	<h2><%=winnerObj.get("id") %> Win!! Congratulations!! </h2>
+	<table class="table co-md-offset-3 col-md-5">
 		<tr>
-			<th>ID</th>
-			<th>금액</th>
-			<th>내가 건 돈</th>
-			<th>선택한 말</th>
+		<td></td>
+			<td>ID</td>
+			<td>금액</td>
+			<td>내가 건 돈</td>
+			<td>선택한 말</td>
 		</tr>
 		<%
 			for (int i = 0; i < playerArray.size(); i++) {
 					System.out.println("=player " + i + " ===========================================");
-					PlayerInfo upt = new PlayerInfo();
+					upt = new PlayerInfo();
 					//배열 안에 있는것도 JSON형식 이기 때문에 JSON Object 로 추출
 					JSONObject playerObject = (JSONObject) playerArray.get(i);
-					if (i == 0)
-						winner = (String) playerObject.get("id");
 					//JSON name으로 추출
 					upt.setPid((String) playerObject.get("id"));
 					upt.setCurMoney(Double.parseDouble(playerObject.get("curMoney").toString()));
@@ -81,10 +84,10 @@ body {
 			<td>
 				<%
 					if (i < 3) {
-				%> <img src="img/<%=i%>.png" class="medal">
+				%> <img src="img/<%=i%>.png" class="medal hidden-xs">
 				<%
 					}
-				%><%=playerObject.get("id")%></td>
+				%><td><%=playerObject.get("id")%></td>
 			<td><%=playerObject.get("curMoney")%></td>
 			<td><%=playerObject.get("playerBetMoney")%></td>
 			<td><%=playerObject.get("hnum")%></td>
@@ -98,7 +101,7 @@ body {
 			}
 		%>
 	</table>
-	<span><%=winner%> Win!! Congratulations!! </span>
+	<button type="button" class="btn btn-primary" onclick=window.location.reload()>다시 하기</button>
 </body>
 <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1 "></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js?ver=1"></script>
