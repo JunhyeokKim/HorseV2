@@ -98,7 +98,7 @@ body {
 			}
 		%>
 	</table>
-	<span><%=winner%> Win!!!! Congratulations!! </span>
+	<span><%=winner%> Win!! Congratulations!! </span>
 </body>
 <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1 "></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js?ver=1"></script>
