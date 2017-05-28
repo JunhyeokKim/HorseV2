@@ -10,8 +10,6 @@
 	String pid = request.getParameter("pid")!=null?request.getParameter("pid"):"";
 	HorseInfo hi = new HorseInfo();
 	hi.setHname("");
-	
-	
 	ArrayList<HorseInfo> hlist = new DAO_HorseInfo().searchHor(hi);
 	request.setAttribute("hlist", hlist);
 	
@@ -127,7 +125,6 @@ background-color: rgba(0,0,10,0.3);
 					</table>
 				</div>
 			</div>
-		</div>
 
 </body>
 <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1 "></script>

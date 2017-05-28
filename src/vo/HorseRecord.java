@@ -1,6 +1,6 @@
 package vo;
 
-public class HorseWinRate {
+public class HorseRecord {
 	private int hnum;
 	private int rank;
 	private String hname;
@@ -10,7 +10,7 @@ public class HorseWinRate {
 	private int third;
 	private int totprize;
 	
-	public HorseWinRate() {}
+	public HorseRecord() {}
 	
 	public int gethnum() {
 		return hnum;
