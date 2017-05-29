@@ -1,3 +1,4 @@
+<%@page import="vo.HorseRecord"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.DAO_PlayerInfo"%>
 <%@page import="vo.PlayerInfo"%>
@@ -29,11 +30,12 @@
 <title>justification</title>
 </head>
 <%
-	DAO_PlayerInfo dao = new DAO_PlayerInfo();
+	DAO_PlayerInfo daoP = new DAO_PlayerInfo();
 	PlayerInfo vo = (PlayerInfo) session.getAttribute("user");
-	PlayerInfo sch = dao.checkDuplicatedId(vo.getPid());
+	PlayerInfo sch = daoP.checkDuplicatedId(vo.getPid());
 	PlayerInfo dump = new PlayerInfo();
-	ArrayList<PlayerInfo> playerList = dao.searchPlayer(dump);
+	
+	ArrayList<PlayerInfo> playerList = daoP.searchPlayer(dump);
 	session.setAttribute("playerList", playerList);
 	session.setAttribute("user", sch);
 %>
