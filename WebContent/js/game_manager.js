@@ -447,7 +447,7 @@ function collisionDetection() { // finish game
     if (gameOver && iflag) { // almost finish
         var msg = "<br>";
         $.each(resMsg, function(index, res) {
-            msg += "<h" + (index + 1) + ">" + (index + 1) + ". : NO. " + res + " horse</h" + (1 + index) + "><br>";
+            msg += "<h" + (index + 1) + ">" + (index + 1) + ". : NO." + res + "horse</h" + (1 + index) + "><br>";
         }) // result print
         msg += "<h2>Thank You!</h2>";
         $("#gameResult").html(msg);
@@ -487,8 +487,6 @@ function drawHorse(param) {
                 horse.target_size.h * (1 + (0.5 * horse.number))
             );
         }
-
-
         ctx.closePath();
     });
 }

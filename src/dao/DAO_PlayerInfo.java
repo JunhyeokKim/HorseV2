@@ -132,17 +132,77 @@ public class DAO_PlayerInfo {
 			}
 		}
 	}
+	public PlayerInfo getOnePlayer(PlayerInfo sch){
+		PlayerInfo vo= new PlayerInfo();
+		String sql = "SELECT * FROM ( \n"
+				+ "SELECT ROWNUM NO, A.* FROM ( \n"
+				+ "SELECT * FROM PLAYER_INFO A ORDER BY CURMONEY DESC) A) WHERE PID = ? ";
+		
+		try {
+			con = AA_Con.conn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sch.getPid());
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){
+				vo = new PlayerInfo();
+				vo.setRank(rs.getInt("no"));
+				vo.setPid(rs.getString("pid"));
+				vo.setPass(rs.getString("pass"));
+				vo.setPname(rs.getString("pname"));
+				vo.setEmail(rs.getString("email"));
+				vo.setTel(rs.getString("tel"));
+				vo.setMchoice(rs.getInt("mChoice"));
+				vo.setTotbet(rs.getDouble("totBet"));
+				vo.setTotBenefit(rs.getDouble("totBenefit"));
+				vo.setTotLose(rs.getDouble("totLose"));
+				vo.setCurMoney(rs.getDouble("curMoney"));
+				vo.setFirst(rs.getInt("first"));
+				vo.setSecond(rs.getInt("second"));
+				vo.setThird(rs.getInt("third"));
+			}
+			System.out.println(sql);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			if(rs != null){
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(pstmt != null){
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(con != null){
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return vo;
+	}
 	
 	public ArrayList<PlayerInfo> searchPlayer(PlayerInfo sch){
 		ArrayList<PlayerInfo> plist = new ArrayList<PlayerInfo>();
 		String sql = "SELECT * FROM ( \n"
 				+ "SELECT ROWNUM NO, A.* FROM ( \n"
 				+ "SELECT * FROM PLAYER_INFO A ORDER BY CURMONEY DESC) A) WHERE PID LIKE '%'||?||'%' AND PNAME LIKE '%'||?||'%' ";
-		
-		
-		/*String sql = "SELECT * FROM PLAYER_INFO \n"
-				+ "WHERE PID LIKE '%'||?||'%' \n"
-				+ "ORDER BY curMoney DESC";*/
 		PlayerInfo pi = null;
 		
 		try {
@@ -344,12 +404,13 @@ public class DAO_PlayerInfo {
 		
 		DAO_PlayerInfo dao = new DAO_PlayerInfo();
 		PlayerInfo pp = new PlayerInfo();
-		pp.setPid("kjho1e3");
+		pp.setPid("test2");
 		pp.setPname("«Ï«Ï");
 		pp.setEmail("gg");
 		pp.setPass("3333");
 		pp.setTel("99999");
 		dao.updatePlayer(pp,1);
+		System.out.println(dao.getOnePlayer(pp).getRank());
 		
 		/*System.out.println("id\tpass\tname\temail\ttel\tmcho\tbet\tbenefit\tlose\tmoney\tfirst\tsecond\tthird");
 		for(PlayerInfo c:dao.searchPlayer(pp)){

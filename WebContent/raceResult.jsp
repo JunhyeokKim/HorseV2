@@ -71,7 +71,7 @@ body {
 			<td>Betting money</td>
 			<td>수익</td>
 			<td>최종 금액</td>
-			<td>선택한 말</td>
+			<td>최종 순위</td>
 		</tr>
 		<%
 			for (int i = 0; i < playerArray.size(); i++) {
@@ -83,6 +83,11 @@ body {
 					upt.setPid((String) playerObject.get("id"));
 					upt.setCurMoney(Double.parseDouble(playerObject.get("curMoney").toString()));
 					dao.updatePlayer(upt, 2);
+			}
+		for(int i=0; i<playerArray.size(); i++){
+			JSONObject playerObject = (JSONObject) playerArray.get(i);
+			PlayerInfo vo= new PlayerInfo();
+			vo.setPid(playerObject.get("id").toString());
 		%>
 		<tr>
 			<td>
@@ -95,7 +100,7 @@ body {
 				<td><%=playerObject.get("playerBetMoney")%></td>
 			<td><%=playerObject.get("benefit")%></td>
 			<td><%=playerObject.get("curMoney")%></td>
-			<td><%=playerObject.get("hnum")%></td>
+			<td><%=dao.getOnePlayer(vo).getRank()%></td>
 		</tr>
 		<%
 			}
