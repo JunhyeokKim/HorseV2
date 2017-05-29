@@ -6,10 +6,21 @@
 	request.setCharacterEncoding("UTF-8");
 	String path = request.getContextPath();
 
-	String pid = request.getParameter("pid") != null ? request.getParameter("pid") : "";
-	HorseInfo hi = new HorseInfo();
-	hi.setHname("");
-	ArrayList<HorseInfo> hlist = new DAO_HorseInfo().searchHor(hi);
+	String hname = request.getParameter("hname") != null ? request.getParameter("hname") : "";
+	String gender = request.getParameter("gender") != null ? request.getParameter("gender") : "";
+	String father = request.getParameter("father") != null ? request.getParameter("father") : "";
+	String mother = request.getParameter("mother") != null ? request.getParameter("mother") : "";
+	String ownerName = request.getParameter("ownerName") != null ? request.getParameter("ownerName") : "";
+	String trainerName = request.getParameter("trainerName") != null ? request.getParameter("trainerName") : "";
+	String type = request.getParameter("type") != null ? request.getParameter("type") : "";
+	HorseInfo sch= new HorseInfo();
+	sch.setHname(hname);
+	sch.setGender(gender);
+	sch.setFather(father);
+	sch.setMother(mother);
+	sch.setOwnerName(ownerName);
+	sch.setTrainerName(trainerName);
+	ArrayList<HorseInfo> hlist = new DAO_HorseInfo().searchHor(sch);
 	request.setAttribute("hlist", hlist);
 %>
 
@@ -51,39 +62,67 @@ body {
 		$(".dropdown-menu li a").click(function() {
 			$("#searchList").text($(this).text());
 		});
-		$(".dropdown-menu > li").click(function(){
+		$(".dropdown-menu > li").click(function() {
 			$("#inner-text").text($(this).text());
+		})
+		$(".dropdown-menu > li").click(function() {
+			var searchType = $(this).text();
+			$("#inner-text").text(searchType);
+			switch(searchType){
+			case "마명":
+				$("#content").attr("name", "hname");
+				break;
+			case "성별":
+				$("#content").attr("name", "gender");
+				break;
+			case "부마명":
+				$("#content").attr("name", "father");
+				break;
+			case "모마명":
+				$("#content").attr("name", "mother");
+				break;
+			case "마주":
+				$("#content").attr("name", "ownerName");
+				break;
+			case "조교사":
+				$("#content").attr("name", "trainerName");
+				break;
+			}
+			$("input[type=hidden]").val($("#content").attr("name"));
 		})
 	});
 </script>
 <body>
 	<div class="row">
-		<br>
-		<br>
-		<div
-			class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">
-			<div class="input-group">
-				<div class="input-group-btn">
-					<button type="button" class="btn btn-default dropdown-toggle"
-						data-toggle="dropdown" aria-expanded="false">
-						<span id="inner-text">선택하세요 </span><span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li>마명</li>
-						<li>부마명</li>
-						<li>모마명</li>
-						<li>마주</li>
-						<li>조교사</li>
-					</ul>
+		<br> <br>
+		<form method="post">
+		<input type="hidden" name="type" />
+			<div
+				class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default dropdown-toggle"
+							data-toggle="dropdown" aria-expanded="false">
+							<span id="inner-text">선택하세요 </span><span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li>마명</li>
+							<li>성별</li>
+							<li>부마명</li>
+							<li>모마명</li>
+							<li>마주</li>
+							<li>조교사</li>
+						</ul>
+					</div>
+					<!-- /btn-group -->
+					<input type="text" class="form-control" id="content"> <span
+						class="input-group-btn">
+						<button class="btn btn-default" type="button" id="search">Go!</button>
+					</span>
 				</div>
-				<!-- /btn-group -->
-				<input type="text" class="form-control"> <span
-					class="input-group-btn">
-					<button class="btn btn-default" type="button">Go!</button>
-				</span>
+				<!-- /input-group -->
 			</div>
-			<!-- /input-group -->
-		</div>
+		</form>
 		<!-- /.col-lg-6 -->
 		<!-- /.col-lg-6 -->
 	</div>

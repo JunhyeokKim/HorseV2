@@ -9,21 +9,17 @@ import java.util.ArrayList;
 import vo.HorseInfo;
 
 public class DAO_HorseInfo {
-	
+
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
-	
-	public ArrayList<HorseInfo> searchHor(HorseInfo sch){
+
+	public ArrayList<HorseInfo> searchHor(HorseInfo sch) {
 		ArrayList<HorseInfo> hlist = new ArrayList<HorseInfo>();
 		HorseInfo hi = null;
-		String sql = "SELECT * FROM HORSE_INFO\n"
-				+ "WHERE HNAME LIKE '%'||?||'%' \n"
-				+ "AND GENDER LIKE '%'||?||'%' \n"
-				+ "AND FATHER LIKE '%'||?||'%' \n"
-				+ "AND MOTHER LIKE '%'||?||'%' \n"
-				+ "AND OWNERNAME LIKE '%'||?||'%'";
+		String sql = "SELECT * FROM HORSE_INFO\n" + "WHERE HNAME LIKE '%'||?||'%' \n" + "AND GENDER LIKE '%'||?||'%' \n"
+				+ "AND FATHER LIKE '%'||?||'%' \n" + "AND MOTHER LIKE '%'||?||'%' \n" + "AND OWNERNAME LIKE '%'||?||'%'"
+				+ "AND TRAINERNAME LIKE '%'||?||'%'";
 		try {
 			con = AA_Con.conn();
 			pstmt = con.prepareStatement(sql);
@@ -32,12 +28,13 @@ public class DAO_HorseInfo {
 			pstmt.setString(3, sch.getFather());
 			pstmt.setString(4, sch.getMother());
 			pstmt.setString(5, sch.getOwnerName());
-			
+			pstmt.setString(6, sch.getTrainerName());
+
 			rs = pstmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				hi = new HorseInfo();
-				hi.setHname(rs.getString("hName"));
-				hi.setHnum(rs.getInt("hNum"));
+				hi.setHname(rs.getString("hname"));
+				hi.setHnum(rs.getInt("hnum"));
 				hi.setBirthdate(rs.getDate("birthdate"));
 				hi.setGender(rs.getString("gender"));
 				hi.setColor(rs.getString("color"));
@@ -55,15 +52,15 @@ public class DAO_HorseInfo {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally{
-			try{
-				if(rs!=null)
+		} finally {
+			try {
+				if (rs != null)
 					rs.close();
-				if(pstmt!=null)
+				if (pstmt != null)
 					pstmt.close();
-				if(con!=null)
+				if (con != null)
 					con.close();
-			}catch (SQLException e) {
+			} catch (SQLException e) {
 				// TODO: handle exception
 				e.printStackTrace();
 			}

@@ -77,33 +77,8 @@ body {
 	$('iframe').iframeAutoHeight({heightOffset: 10}); */
 </script>
 <body>
-	<!-- <div class="row" width="100%" height="100%">
-				<br>
-				<form method="post">
-					<div
-						class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 form-group">
-						<div class="input-group">
-							<div class="input-group-btn" >
-								<button type="button" class="btn btn-default" id="searchList">ID 검색 </button>
-							</div>
-							/btn-group
-							<input type="text" name="pid" class="form-control"
-								placeholder="플레이어 ID 또는 경주마 이름"> <span
-								class="input-group-btn">
-								<button id="search" class="btn btn-default" type="button">Search!</button>
-							</span>
-						</div>
-					</div>
-					/input-group
-					<div class="row col-sm-offset-5 col-sm-3">
-						<br><br>
-						<button type="button" id="resett" class="btn btn-primary btn-lg ">모든 Player 보기</button>
-					</div>
-					/.col-lg-6
-				</form>
-			</div> -->
 	<div class="row">
-		<br> <br>
+		<br><br>
 		<form method="post">
 			<input type="hidden" name="type" />
 			<div
@@ -133,7 +108,6 @@ body {
 	</div>
 	<!-- /.row -->
 	<!-- /.row -->
-	<br>
 	<br>
 	<div class="row col-sm-offset-2 col-sm-8">
 		<div class="panel panel-default">
