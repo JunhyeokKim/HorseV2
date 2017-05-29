@@ -1,25 +1,43 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
-	import="vo.HorseRecord"
-	import="dao.DAO_HorseRecord"
-	%>
+	pageEncoding="UTF-8" import="vo.HorseRecord"
+	import="dao.DAO_HorseRecord"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- Bootstrap Core CSS -->
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/stylish-portfolio.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+	rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<style type="text/css">
+body {
+	background-color: rgba(0, 0, 10, 0.3);
+}
+</style>
 </head>
 <%
-String pid = request.getParameter("pid")!=null?request.getParameter("pid"):"";
-HorseRecord vo = new HorseRecord();
-
-ArrayList<HorseRecord> hlist =
-request.setAttribute("hlist", hlist);
-
+	String pid = request.getParameter("pid") != null ? request.getParameter("pid") : "";
+	HorseRecord sch = new HorseRecord();
+	sch.sethname("");
+	ArrayList<HorseRecord> hrList = new DAO_HorseRecord().searchHor(sch);
+	request.setAttribute("hrList", hrList);
 %>
 <body>
-	<div class="row">
+<!-- 	<div class="row">
 		<br>
 		<form method="post">
 			<div
@@ -40,7 +58,7 @@ request.setAttribute("hlist", hlist);
 							<li id="onameL"><a href="#">마주</a></li>
 						</ul>
 					</div>
-					<!-- /btn-group -->
+					/btn-group
 					<input type="text" name="pid" class="form-control"
 						placeholder="경주마 정보 검색"> <span class="input-group-btn">
 						<button id="search" class="btn btn-default" type="button">찾아보기</button>
@@ -48,7 +66,8 @@ request.setAttribute("hlist", hlist);
 				</div>
 			</div>
 		</form>
-	</div>
+	</div> -->
+	
 	<!-- /.row -->
 	<br>
 	<br>
@@ -62,8 +81,8 @@ request.setAttribute("hlist", hlist);
 			<!-- Table -->
 			<table class="table">
 				<tr>
-					<th>마번</th>
 					<th>순위</th>
+					<th>마번</th>
 					<th>마명</th>
 					<th>총 경기 횟수</th>
 					<th>1등 횟수</th>
@@ -71,19 +90,16 @@ request.setAttribute("hlist", hlist);
 					<th>3등 횟수</th>
 					<th>총 획득 상금</th>
 				</tr>
-				<c:forEach var="horseList" items="${hlist}" varStatus="sts">
+				<c:forEach var="horseList" items="${hrList}" varStatus="sts">
 					<tr>
-						<td>${horseList.hn }</td>
+						<td>${horseList.rank }</td>
 						<td>${horseList.hnum }</td>
-						<td>${horseList.birthdate }</td>
-						<td>${horseList.gender }</td>
-						<td>${horseList.color }</td>
-						<td>${horseList.regdate }</td>
-						<td>${horseList.country }</td>
-						<td>${horseList.father }</td>
-						<td>${horseList.mother }</td>
-						<td>${horseList.trainerName}</td>
-						<td>${horseList.ownerName }</td>
+						<td>${horseList.hname }</td>
+						<td>${horseList.totrace }</td>
+						<td>${horseList.first }</td>
+						<td>${horseList.second }</td>
+						<td>${horseList.third }</td>
+						<td>${horseList.totprize }</td>
 					</tr>
 				</c:forEach>
 			</table>

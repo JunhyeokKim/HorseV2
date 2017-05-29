@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import vo.HorseInfo;
 import vo.HorseRecord;
 
 public class DAO_HorseRecord {
@@ -14,18 +13,24 @@ public class DAO_HorseRecord {
 	private ResultSet rs;
 	
 	public ArrayList<HorseRecord> searchHor(HorseRecord sch){
-		ArrayList<HorseInfo> hlist = new ArrayList<HorseInfo>();
+		ArrayList<HorseRecord> hlist = new ArrayList<HorseRecord>();
 		HorseRecord vo= null;
-		String sql = "SELECT * FROM HORSE_INFO\n"
+		String sql = "SELECT * FROM HORSE_RECORD\n"
 				+ "WHERE HNAME LIKE '%'||?||'%' ";
 		try {
 			con = AA_Con.conn();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, vo.gethname());
+			pstmt.setString(1, sch.gethname());
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				vo = new HorseRecord();
 				vo.sethname(rs.getString("hname"));
+				vo.sethnum((rs.getInt("hnum")));
+				vo.setTotrace(rs.getInt("totrace"));
+				vo.setFirst((rs.getInt("first")));
+				vo.setSecond((rs.getInt("second")));
+				vo.setThird((rs.getInt("third")));
+				vo.setTotprize(rs.getInt("totprize"));
 				hlist.add(vo);
 			}
 		} catch (ClassNotFoundException e) {
@@ -49,5 +54,14 @@ public class DAO_HorseRecord {
 		}
 		System.out.println(sql);
 		return hlist;
+	}
+	public static void main(String[] args) {
+		DAO_HorseRecord dao= new DAO_HorseRecord();
+		HorseRecord sch= new HorseRecord();
+		sch.sethname("");
+		for(HorseRecord vo:dao.searchHor(sch)){
+			System.out.println(vo.gethname());
+			System.out.println(vo.gethnum());
+		}
 	}
 }

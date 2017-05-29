@@ -45,7 +45,7 @@ public class DAO_HorseInfo {
 				hi.setCountry(rs.getString("country"));
 				hi.setFather(rs.getString("father"));
 				hi.setMother(rs.getString("mother"));
-				hi.setTrainerName(rs.getString("tranerName"));
+				hi.setTrainerName(rs.getString("trainerName"));
 				hi.setOwnerName(rs.getString("ownerName"));
 				hlist.add(hi);
 			}

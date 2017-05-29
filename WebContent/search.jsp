@@ -38,20 +38,26 @@ body {
 <script src="<%=path%>/com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		$("#homeBtn").click(function() {
+			$("iframe").attr("src", "search.jsp");
+			$("li").attr("class", "");
+			location.reload();
+		})
 		$("#prBtn").click(function() {
 			$("iframe").attr("src", "playerRank.jsp");
+			$("li").attr("class", "");
+			$(this).attr("class","active");
 		})
 		$("#hrBtn").click(function() {
-			$("iframe").attr("src", "playerRank.jsp");
+			$("iframe").attr("src", "horseRank.jsp");
+			$("li").attr("class", "");
+			$(this).attr("class","active");
 		})
 		$("#hlBtn").click(function() {
 			$("iframe").attr("src", "horseList.jsp");
+			$("li").attr("class", "");
+			$(this).attr("class","active");
 		})
-		$("#prBtn").click(function() {
-			$("iframe").attr("src", "playerRank.jsp");
-		})
-
 		$(".dropdown-menu li a").click(function() {
 			$("#searchList").text($(this).text());
 		});
@@ -71,9 +77,9 @@ body {
 				</h1>
 				<br>
 				<form method="post">
-					<ul
+					<ul id="nav-tap"
 						class="nav nav-pills col-sm-offset-2 col-md-offset-2 col-xs-offset-4  col-md-6 col-sm-6 col-xs-4">
-						<li class="active"><a href="#">home</a></li>
+						<li id="homeBtn" class="active"><a href="#">home</a></li>
 						<li id="prBtn"><a href="#">플레이어 순위</a></li>
 						<li id="hrBtn"><a href="#">경주마 순위</a></li>
 						<li id="hlBtn"><a href="#">경주마 list</a></li>

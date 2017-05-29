@@ -137,7 +137,8 @@ public class DAO_PlayerInfo {
 		ArrayList<PlayerInfo> plist = new ArrayList<PlayerInfo>();
 		String sql = "SELECT * FROM ( \n"
 				+ "SELECT ROWNUM NO, A.* FROM ( \n"
-				+ "SELECT * FROM PLAYER_INFO A ORDER BY CURMONEY DESC) A) WHERE PID LIKE '%'||?||'%'";
+				+ "SELECT * FROM PLAYER_INFO A ORDER BY CURMONEY DESC) A) WHERE PID LIKE '%'||?||'%' AND PNAME LIKE '%'||?||'%' ";
+		
 		
 		/*String sql = "SELECT * FROM PLAYER_INFO \n"
 				+ "WHERE PID LIKE '%'||?||'%' \n"
@@ -148,6 +149,7 @@ public class DAO_PlayerInfo {
 			con = AA_Con.conn();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sch.getPid());
+			pstmt.setString(2, sch.getPname());
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()){
