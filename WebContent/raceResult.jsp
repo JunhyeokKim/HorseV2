@@ -48,7 +48,7 @@ body {
 		//books의 배열을 추출
 		JSONArray playerArray = (JSONArray) jsonObject.get("playersInfo");
 %>
-
+playerArray.get
 
 <body>
 	<%-- <h1><%=playerObject.get("id")%></h1>

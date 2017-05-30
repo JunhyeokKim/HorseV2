@@ -49,12 +49,12 @@ body {
 			$(this).attr("class", "active");
 		})
 		$("#hrBtn").click(function() {
-			$("iframe").attr("src", "horseRank.jsp");
+			$("iframe").attr("src", "horseRank.jsp?pageIndex=0");
 			$("li").attr("class", "");
 			$(this).attr("class", "active");
 		})
 		$("#hlBtn").click(function() {
-			$("iframe").attr("src", "horseList.jsp");
+			$("iframe").attr("src", "horseList.jsp?pageIndex=0");
 			$("li").attr("class", "");
 			$(this).attr("class", "active");
 		})

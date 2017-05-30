@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8" import="vo.*,dao.*,java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 	String path = request.getContextPath();
@@ -13,17 +15,21 @@
 	String ownerName = request.getParameter("ownerName") != null ? request.getParameter("ownerName") : "";
 	String trainerName = request.getParameter("trainerName") != null ? request.getParameter("trainerName") : "";
 	String type = request.getParameter("type") != null ? request.getParameter("type") : "";
-	HorseInfo sch= new HorseInfo();
-	sch.setHname(hname);
-	sch.setGender(gender);
-	sch.setFather(father);
-	sch.setMother(mother);
-	sch.setOwnerName(ownerName);
-	sch.setTrainerName(trainerName);
-	ArrayList<HorseInfo> hlist = new DAO_HorseInfo().searchHor(sch);
-	request.setAttribute("hlist", hlist);
+	if (request.getParameter("pageIndex") == null || request.getParameter("pageIndex").equals(""))
+		request.setAttribute("pageIndex", 0);
+	else {
+		request.setAttribute("pageIndex", Integer.parseInt(request.getParameter("pageIndex")));
+		HorseInfo sch = new HorseInfo();
+		sch.setHname(hname);
+		sch.setGender(gender);
+		sch.setFather(father);
+		sch.setMother(mother);
+		sch.setOwnerName(ownerName);
+		sch.setTrainerName(trainerName);
+		ArrayList<HorseInfo> hlist = new DAO_HorseInfo().popNRow(sch, Integer.parseInt(request.getParameter("pageIndex")));
+		request.setAttribute("hlist", hlist);
+	}
 %>
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -49,10 +55,10 @@
 <style type="text/css">
 body {
 	background-color: rgba(0, 0, 10, 0.3);
-	
 }
-li{
-cursor:pointer;
+
+li {
+	cursor: pointer;
 }
 </style>
 </head>
@@ -72,7 +78,7 @@ cursor:pointer;
 		$(".dropdown-menu > li").click(function() {
 			var searchType = $(this).text();
 			$("#inner-text").text(searchType);
-			switch(searchType){
+			switch (searchType) {
 			case "마명":
 				$("#content").attr("name", "hname");
 				break;
@@ -100,7 +106,7 @@ cursor:pointer;
 	<div class="row">
 		<br> <br>
 		<form method="post">
-		<input type="hidden" name="type" />
+			<input type="hidden" name="type" />
 			<div
 				class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4">
 				<div class="input-group">
@@ -201,6 +207,16 @@ cursor:pointer;
 				</c:forEach>
 			</table>
 		</div>
+	<nav>
+		<ul class="pager">
+			<c:if test="${pageIndex != 0 && fn:length(hlist) >= 20}">
+				<li><a href="horseList.jsp?pageIndex=${pageIndex-1 }">Previous</a></li>
+			</c:if>
+			<c:if test="${fn:length(hlist) >=20 }">
+				<li><a href="horseList.jsp?pageIndex=${pageIndex+1 }">Next</a></li>
+			</c:if>
+		</ul>
+		</nav>
 	</div>
 
 </body>

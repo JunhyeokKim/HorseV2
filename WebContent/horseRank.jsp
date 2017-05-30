@@ -4,21 +4,23 @@
 	import="dao.DAO_HorseRecord"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String path = request.getContextPath();
 
-	if (request.getParameter("pageIndex") == null || request.getParameter("pageIndex").equals("") )
+	if (request.getParameter("pageIndex") == null || request.getParameter("pageIndex").equals(""))
 		request.setAttribute("pageIndex", 0);
-	else
-		request.setAttribute("pageIndex", Integer.parseInt(request.getParameter("pageIndex")) + 1);
-	int pageIndex=request.getParameter("pageIndex")!=null?Integer.parseInt(request.getParameter("pageIndex")):0;
-	String hname = request.getParameter("hname") != null ? request.getParameter("hname") : "";
-	System.out.println(request.getParameter("pageIndex"));
-	HorseRecord sch = new HorseRecord();
-	sch.setHname(hname);
-	ArrayList<HorseRecord> hrList = new DAO_HorseRecord().popNRow(pageIndex);
-	request.setAttribute("hrList", hrList);
+	else {
+		System.out.println(request.getParameter("pageIndex"));
+		request.setAttribute("pageIndex", Integer.parseInt(request.getParameter("pageIndex")));
+		HorseRecord sch = new HorseRecord();
+		String hname = request.getParameter("hname") != null ? request.getParameter("hname") : "";
+		sch.setHname(hname);
+		ArrayList<HorseRecord> hrList = new DAO_HorseRecord().popNRow(sch,
+				Integer.parseInt(request.getParameter("pageIndex")));
+		request.setAttribute("hrList", hrList);
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,10 +57,6 @@ body {
 			var searchType = $(this).text();
 			$("#inner-text").text(searchType);
 		})
-		$("#previous").click(function(){
-			<c:set />
-		})
-		
 	})
 </script>
 </head>
@@ -117,12 +115,18 @@ body {
 				</c:forEach>
 			</table>
 		</div>
+
 		<nav>
 		<ul class="pager">
-			<li><a href="horseRank.jsp?pageIndex=${pageIndex }" id="previous">Previous</a></li>
-			<li><a href="horseRank.jsp?pageIndex=${pageIndex }" id="next">Next</a></li>
+			<c:if test="${pageIndex != 0 && fn:length(hrList) >= 20}">
+				<li><a href="horseRank.jsp?pageIndex=${pageIndex-1 }">Previous</a></li>
+			</c:if>
+			<c:if test="${fn:length(hrList) >=20 }">
+				<li><a href="horseRank.jsp?pageIndex=${pageIndex+1 }">Next</a></li>
+			</c:if>
 		</ul>
 		</nav>
+
 	</div>
 </body>
 </html>

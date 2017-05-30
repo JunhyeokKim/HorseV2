@@ -14,18 +14,39 @@ public class DAO_HorseRecord {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	public ArrayList<HorseRecord> popNRow(int n) {
+	public ArrayList<HorseRecord> popNRow(HorseRecord sch, int n) {
 		ArrayList<HorseRecord> voList = new ArrayList<HorseRecord>();
-		String sql = "SELECT * FROM ( \n"
-				+ "SELECT ROWNUM NO, A.* FROM ( \n"
-				+ "SELECT * FROM HORSE_RECORD A ) A) WHERE NO BETWEEN ? AND ? ";
-		
+		int rowCnt = 0;
+		String cnt = "SELECT COUNT( * ) AS CNT FROM ( SELECT * FROM ( \n" + "SELECT ROWNUM NO, A.* FROM ( \n"
+				+ "SELECT * FROM HORSE_RECORD A ) A) WHERE " + "HNAME LIKE '%'||?||'%' )";
+
+		String sqlLess = "SELECT * FROM ( \n" + "SELECT ROWNUM NO, A.* FROM ( \n"
+				+ "SELECT * FROM HORSE_RECORD A ) A) WHERE " + "HNAME LIKE '%'||?||'%' ";
+
+		String sqlBetween = "SELECT * FROM ( \n" + "SELECT ROWNUM NO, A.* FROM ( \n"
+				+ "SELECT * FROM HORSE_RECORD A ) A) WHERE " + "HNAME LIKE '%'||?||'%' AND " + "NO BETWEEN ? AND ? ";
+
 		HorseRecord vo = null;
 		try {
 			con = AA_Con.conn();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, 20*n);
-			pstmt.setInt(2, 20*(n+1));
+			pstmt = con.prepareStatement(cnt);
+			pstmt.setString(1, sch.getHname());
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				rowCnt = rs.getInt("cnt");
+			}
+
+			con = AA_Con.conn();
+			if (rowCnt > 20) {
+				pstmt = con.prepareStatement(sqlBetween);
+				pstmt.setString(1, sch.getHname());
+				pstmt.setInt(2, 20 * n+1);
+				pstmt.setInt(3, 20 * (n + 1));
+			} else {
+				pstmt = con.prepareStatement(sqlLess);
+				pstmt.setString(1, sch.getHname());
+			}
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				vo = new HorseRecord();
@@ -161,7 +182,7 @@ public class DAO_HorseRecord {
 				+ "SECOND = ? \n"
 				+ "THIRD = ? \n"
 				+ "WHERE HNAME = ?";
-		
+		// ?
 		try {
 			con = AA_Con.conn();
 			con.setAutoCommit(false);
@@ -202,7 +223,7 @@ public class DAO_HorseRecord {
 			}
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		DAO_HorseRecord dao = new DAO_HorseRecord();
 		HorseRecord sch = new HorseRecord();
