@@ -1,6 +1,6 @@
 <%@page import="vo.HorseRecord"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="dao.DAO_PlayerInfo"%>
+<%@page import="dao.*"%>
 <%@page import="vo.PlayerInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -31,6 +31,8 @@
 </head>
 <%
 	DAO_PlayerInfo daoP = new DAO_PlayerInfo();
+	DAO_HorseRecord daoR = new DAO_HorseRecord();
+	
 	PlayerInfo vo = (PlayerInfo) session.getAttribute("user");
 	PlayerInfo sch = daoP.checkDuplicatedId(vo.getPid());
 	PlayerInfo dump = new PlayerInfo();

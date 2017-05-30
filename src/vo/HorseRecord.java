@@ -12,10 +12,10 @@ public class HorseRecord {
 	
 	public HorseRecord() {}
 	
-	public int gethnum() {
+	public int getHnum() {
 		return hnum;
 	}
-	public void sethnum(int hnum) {
+	public void setHnum(int hnum) {
 		this.hnum = hnum;
 	}
 	public int getRank() {
@@ -24,10 +24,10 @@ public class HorseRecord {
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
-	public String gethname() {
+	public String getHname() {
 		return hname;
 	}
-	public void sethname(String hname) {
+	public void setHname(String hname) {
 		this.hname = hname;
 	}
 	public int getTotrace() {

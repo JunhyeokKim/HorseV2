@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import vo.HorseRecord;
 
 public class DAO_HorseRecord {
 	private Connection con;
+	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
@@ -20,12 +22,12 @@ public class DAO_HorseRecord {
 		try {
 			con = AA_Con.conn();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sch.gethname());
+			pstmt.setString(1, sch.getHname());
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				vo = new HorseRecord();
-				vo.sethname(rs.getString("hname"));
-				vo.sethnum((rs.getInt("hnum")));
+				vo.setHname(rs.getString("hname"));
+				vo.setHnum((rs.getInt("hnum")));
 				vo.setTotrace(rs.getInt("totrace"));
 				vo.setFirst((rs.getInt("first")));
 				vo.setSecond((rs.getInt("second")));
@@ -55,13 +57,46 @@ public class DAO_HorseRecord {
 		System.out.println(sql);
 		return hlist;
 	}
+	
+	public ArrayList<HorseRecord> fiveHorse(){
+		ArrayList<HorseRecord> flist = new ArrayList<HorseRecord>();
+		String sql = "SELECT * FROM (\n"
+				+ "SELECT * FROM HORSE_RECORD ORDER BY DBMS_RANDOM.RANDOM) WHERE ROWNUM < 6";
+		
+		try {
+			con = AA_Con.conn();
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			HorseRecord hr = null;
+			while(rs.next()){
+				hr = new HorseRecord();
+				hr.setHname(rs.getString("hname"));
+				hr.setHname(rs.getString("hname"));
+				hr.setHname(rs.getString("hname"));
+				hr.setHname(rs.getString("hname"));
+				hr.setHname(rs.getString("hname"));
+				hr.setHname(rs.getString("hname"));
+				hr.setHname(rs.getString("hname"));
+				hr.setHname(rs.getString("hname"));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flist;
+	}
+	
 	public static void main(String[] args) {
 		DAO_HorseRecord dao= new DAO_HorseRecord();
 		HorseRecord sch= new HorseRecord();
-		sch.sethname("");
+		sch.setHname("");
 		for(HorseRecord vo:dao.searchHor(sch)){
-			System.out.println(vo.gethname());
-			System.out.println(vo.gethnum());
+			System.out.println(vo.getHname());
+			System.out.println(vo.getHnum());
 		}
 	}
 }
