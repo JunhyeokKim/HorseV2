@@ -14,50 +14,6 @@ public class DAO_HorseRecord {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-
-	public ArrayList<HorseRecord> searchHor(HorseRecord sch) {
-		ArrayList<HorseRecord> hlist = new ArrayList<HorseRecord>();
-		HorseRecord vo = null;
-		String sql = "SELECT * FROM HORSE_RECORD\n" + "WHERE HNAME LIKE '%'||?||'%' ";
-		try {
-			con = AA_Con.conn();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, sch.getHname());
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				vo = new HorseRecord();
-				vo.setHname(rs.getString("hname"));
-				vo.setHnum((rs.getInt("hnum")));
-				vo.setTotrace(rs.getInt("totrace"));
-				vo.setFirst((rs.getInt("first")));
-				vo.setSecond((rs.getInt("second")));
-				vo.setThird((rs.getInt("third")));
-				vo.setTotprize(rs.getInt("totprize"));
-				hlist.add(vo);
-			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException e) {
-				// TODO: handle exception
-				e.printStackTrace();
-			}
-		}
-		System.out.println(sql);
-		return hlist;
-	}
-	
 	public ArrayList<HorseRecord> popNRow(int n) {
 		ArrayList<HorseRecord> voList = new ArrayList<HorseRecord>();
 		String sql = "SELECT * FROM ( \n"
@@ -102,6 +58,49 @@ public class DAO_HorseRecord {
 			}
 		}
 		return voList;
+	}
+
+	public ArrayList<HorseRecord> searchHor(HorseRecord sch) {
+		ArrayList<HorseRecord> hlist = new ArrayList<HorseRecord>();
+		HorseRecord vo = null;
+		String sql = "SELECT * FROM HORSE_RECORD\n" + "WHERE HNAME LIKE '%'||?||'%' ";
+		try {
+			con = AA_Con.conn();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sch.getHname());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				vo = new HorseRecord();
+				vo.setHname(rs.getString("hname"));
+				vo.setHnum((rs.getInt("hnum")));
+				vo.setTotrace(rs.getInt("totrace"));
+				vo.setFirst((rs.getInt("first")));
+				vo.setSecond((rs.getInt("second")));
+				vo.setThird((rs.getInt("third")));
+				vo.setTotprize(rs.getInt("totprize"));
+				hlist.add(vo);
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
+		}
+		System.out.println(sql);
+		return hlist;
 	}
 
 	public ArrayList<HorseRecord> fiveHorse() {

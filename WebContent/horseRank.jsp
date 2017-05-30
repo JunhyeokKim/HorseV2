@@ -10,6 +10,8 @@
 
 	if (request.getParameter("pageIndex") == null || request.getParameter("pageIndex").equals("") )
 		request.setAttribute("pageIndex", 0);
+	else
+		request.setAttribute("pageIndex", Integer.parseInt(request.getParameter("pageIndex")) + 1);
 	int pageIndex=request.getParameter("pageIndex")!=null?Integer.parseInt(request.getParameter("pageIndex")):0;
 	String hname = request.getParameter("hname") != null ? request.getParameter("hname") : "";
 	System.out.println(request.getParameter("pageIndex"));
@@ -53,6 +55,10 @@ body {
 			var searchType = $(this).text();
 			$("#inner-text").text(searchType);
 		})
+		$("#previous").click(function(){
+			<c:set />
+		})
+		
 	})
 </script>
 </head>
@@ -113,8 +119,8 @@ body {
 		</div>
 		<nav>
 		<ul class="pager">
-			<li><a href="horseRank.jsp?pageIndex=${pageIndex }" onclick="">Previous</a></li>
-			<li><a href="horseRank.jsp?pageIndex=${pageIndex }">Next</a></li>
+			<li><a href="horseRank.jsp?pageIndex=${pageIndex }" id="previous">Previous</a></li>
+			<li><a href="horseRank.jsp?pageIndex=${pageIndex }" id="next">Next</a></li>
 		</ul>
 		</nav>
 	</div>

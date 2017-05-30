@@ -29,7 +29,8 @@ public class DAO_HorseInfo {
 			pstmt.setString(4, sch.getMother());
 			pstmt.setString(5, sch.getOwnerName());
 			pstmt.setString(6, sch.getTrainerName());
-
+			
+			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				hi = new HorseInfo();
