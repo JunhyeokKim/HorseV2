@@ -85,7 +85,7 @@
 							<c:set var="cntt" value="0" />
 							<c:forEach var="hl" items="${flist}">
 							
-								<td class="horseExplain"><img src="img/Horse__${cntt}.png"
+								<td class="horseExplain" onclick="player[0].hname='${hl.hname}'"><img src="img/Horse__${cntt}.png"
 									class="horseImg img-responsive"><br>
 									마명 : ${hl.hname}<br>
 									누적 상금 : ${hl.totprize }<br><br>
@@ -179,41 +179,47 @@ for (int i=0; i<playerList.size(); i++) {
 <script src="js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript" src="js/game_manager.js?ver=3"
 	charset="UTF-8"></script>
-<script type="text/javascript" src="js/menu_manager.js?ver=3"
+<script type="text/javascript" src="js/menu_manager.js?ver=4"
 	charset="UTF-8"></script>
 <script type="text/javascript">
+	var horseNames=["${flist[0].hname}","${flist[1].hname}","${flist[2].hname}","${flist[3].hname}","${flist[4].hname}"];
 	var player = [ {
 		id : "${user.pid}",
 		curMoney : parseInt('${user.curMoney}'),
 		playerBetMoney : Math.floor(parseInt('${user.curMoney}') / 2),
 		benefit:0,
-		hnum : NaN
+		hnum : NaN,
+		hname: ""
 	}, {
 		id : "${playerList[0].pid}",
 		curMoney : parseInt('${playerList[0].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[0].curMoney}')/4),
 		benefit:0,
-		hnum : NaN
+		hnum : NaN,
+		hname: ""
 	}, {
 		id : "${playerList[1].pid}",
 		curMoney : parseInt('${playerList[1].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[1].curMoney}')/4),
 		benefit:0,
-		hnum : NaN
+		hnum : NaN,
+		hname: ""
 	}, {
 		id : "${playerList[2].pid}",
 		curMoney : parseInt('${playerList[2].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[2].curMoney}')/4),
 		benefit:0,
-		hnum : NaN
+		hnum : NaN,
+		hname: ""
 	}, {
 		id : "${playerList[3].pid}",
 		curMoney : parseInt('${playerList[3].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[3].curMoney}')/4),
 		benefit:0,
-		hnum : NaN
+		hnum : NaN,
+		hname: ""
 	} ];
-
+	
 	$(function() {
 		$("#slider").slider({
 			value : player[0].curMoney / 2,

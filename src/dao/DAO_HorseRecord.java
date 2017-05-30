@@ -130,10 +130,79 @@ public class DAO_HorseRecord {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally{
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return flist;
 	}
 
+	public void updateHorse(HorseRecord upt){
+		String sql = "UPDATE HORSE_RECORD SET \n"
+				+ "TOTPRIZE = ?, \n"
+				+ "TOTRACE = ? \n"
+				+ "FIRST = ? \n"
+				+ "SECOND = ? \n"
+				+ "THIRD = ? \n"
+				+ "WHERE HNAME = ?";
+		
+		try {
+			con = AA_Con.conn();
+			con.setAutoCommit(false);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, upt.getTotprize());
+			pstmt.setInt(2, upt.getTotrace());
+			pstmt.setInt(3, upt.getFirst());
+			pstmt.setInt(4, upt.getSecond());
+			pstmt.setInt(5, upt.getThird());
+			pstmt.setString(6, upt.getHname());
+			pstmt.executeUpdate();
+			con.commit();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} finally{
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public static void main(String[] args) {
 		DAO_HorseRecord dao = new DAO_HorseRecord();
 		HorseRecord sch = new HorseRecord();

@@ -16,6 +16,7 @@ function allocHorse() {
     pool.splice(pool.indexOf(player[0].hnum), 1);
     for (var idx = 1; idx < player.length; idx++) {
         player[idx].hnum = pool[idx - 1];
+        player[idx].hname= horseNames[player[idx].hnum-1];
     }
     $.each(player, function(index, item) {
         console.log(item.id + ": " + item.hnum)
@@ -80,6 +81,9 @@ $(document).ready(function() {
 function start() {
     $("#menus").hide("fade", 1500, init);
     allocHorse();
+    $.each(player,function(index,item){
+    	console.log("말 이름 :"+item.hname);
+    })
 }
 
 function callResult() {
