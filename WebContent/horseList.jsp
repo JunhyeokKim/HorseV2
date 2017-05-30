@@ -49,6 +49,10 @@
 <style type="text/css">
 body {
 	background-color: rgba(0, 0, 10, 0.3);
+	
+}
+li{
+cursor:pointer;
 }
 </style>
 </head>

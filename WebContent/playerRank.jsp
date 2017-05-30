@@ -42,6 +42,9 @@
 body {
 	background-color: rgb(80, 80, 80);
 }
+li{
+cursor:pointer;
+}
 </style>
 </head>
 <script src="<%=path%>/com/jquery-1.10.2.js"></script>

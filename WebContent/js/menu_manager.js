@@ -107,9 +107,6 @@ function whenSuccess(resdata){
 function whenError(){
 	alert("error");
 }
-
-    
-
 }
 
 function betting() {
@@ -118,10 +115,6 @@ function betting() {
       console.log("horse number: " + player[0].hnum);
     if ( player[0].curMoney >= player[0].playerBetMoney) {
         if (Number(player[0].hnum)) {
-           /* console.log("rest money: " + player[0].curMoney);
-            console.log("Betting money: " + player[0].playerBetMoney);
-            console.log("horse number: " + player[0].hnum);
-*/
             return true;
         } else
             alert("You must select a horse.");
@@ -153,8 +146,4 @@ function giveBackMoney(winner) {
         }
         item.curMoney = item.benefit + item.curMoney;
     })
-    /*
-     * console.log("Betting Money : "+player[0].playerBetMoney);
-     * console.log("Total Money : "+player[0].myMoney);
-     */
 }
