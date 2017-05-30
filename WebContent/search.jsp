@@ -46,17 +46,17 @@ body {
 		$("#prBtn").click(function() {
 			$("iframe").attr("src", "playerRank.jsp");
 			$("li").attr("class", "");
-			$(this).attr("class","active");
+			$(this).attr("class", "active");
 		})
 		$("#hrBtn").click(function() {
 			$("iframe").attr("src", "horseRank.jsp");
 			$("li").attr("class", "");
-			$(this).attr("class","active");
+			$(this).attr("class", "active");
 		})
 		$("#hlBtn").click(function() {
 			$("iframe").attr("src", "horseList.jsp");
 			$("li").attr("class", "");
-			$(this).attr("class","active");
+			$(this).attr("class", "active");
 		})
 		$(".dropdown-menu li a").click(function() {
 			$("#searchList").text($(this).text());
@@ -87,10 +87,11 @@ body {
 				</form>
 			</div>
 		</div>
-
-		<iframe src="" frameborder="0" width="100%" onload="autoResize(this)"
-			marginwidth="0" marginheight="0" scrolling="no"></iframe>
+		<iframe src="" frameborder="0" width="100%" height="40%"
+			onload="autoResize(this)" marginwidth="0" marginheight="0"
+			scrolling="no"></iframe>
 	</div>
+	
 
 </body>
 <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1 "></script>

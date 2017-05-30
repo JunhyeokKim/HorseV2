@@ -5,16 +5,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-request.setCharacterEncoding("UTF-8");
-String path = request.getContextPath();
+	request.setCharacterEncoding("UTF-8");
+	String path = request.getContextPath();
 
-String hname = request.getParameter("hname") != null ? request.getParameter("hname") : "";
-HorseRecord sch= new HorseRecord();
-sch.sethname(hname);
-ArrayList<HorseRecord> hrList = new DAO_HorseRecord().searchHor(sch);
-request.setAttribute("hrList", hrList);
-
+	if (request.getParameter("pageIndex") == null || request.getParameter("pageIndex").equals("") )
+		request.setAttribute("pageIndex", 0);
+	int pageIndex=request.getParameter("pageIndex")!=null?Integer.parseInt(request.getParameter("pageIndex")):0;
+	String hname = request.getParameter("hname") != null ? request.getParameter("hname") : "";
+	System.out.println(request.getParameter("pageIndex"));
+	HorseRecord sch = new HorseRecord();
+	sch.setHname(hname);
+	ArrayList<HorseRecord> hrList = new DAO_HorseRecord().popNRow(pageIndex);
+	request.setAttribute("hrList", hrList);
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,7 +45,7 @@ body {
 </style>
 <script src="<%=path%>/com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$("#search").click(function() {
 			$("form").submit();
 		})
@@ -107,6 +111,12 @@ body {
 				</c:forEach>
 			</table>
 		</div>
+		<nav>
+		<ul class="pager">
+			<li><a href="horseRank.jsp?pageIndex=${pageIndex }" onclick="">Previous</a></li>
+			<li><a href="horseRank.jsp?pageIndex=${pageIndex }">Next</a></li>
+		</ul>
+		</nav>
 	</div>
 </body>
 </html>
