@@ -103,26 +103,28 @@ public class DAO_HorseRecord {
 		return hlist;
 	}
 
-	public ArrayList<HorseRecord> fiveHorse() {
+	public ArrayList<HorseRecord> fiveHorse(){
 		ArrayList<HorseRecord> flist = new ArrayList<HorseRecord>();
-		String sql = "SELECT * FROM (\n" + "SELECT * FROM HORSE_RECORD ORDER BY DBMS_RANDOM.RANDOM) WHERE ROWNUM < 6";
-
+		String sql = "SELECT * FROM (\n"
+				+ "SELECT * FROM HORSE_RECORD ORDER BY DBMS_RANDOM.RANDOM) WHERE ROWNUM < 6";
+		
 		try {
 			con = AA_Con.conn();
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
-
+			
 			HorseRecord hr = null;
-			while (rs.next()) {
+			while(rs.next()){
 				hr = new HorseRecord();
 				hr.setHname(rs.getString("hname"));
-				hr.setHname(rs.getString("hname"));
-				hr.setHname(rs.getString("hname"));
-				hr.setHname(rs.getString("hname"));
-				hr.setHname(rs.getString("hname"));
-				hr.setHname(rs.getString("hname"));
-				hr.setHname(rs.getString("hname"));
-				hr.setHname(rs.getString("hname"));
+				hr.setHnum(rs.getInt("hnum"));
+				hr.setRank(rs.getInt("rank"));
+				hr.setTotrace(rs.getInt("totrace"));
+				hr.setFirst(rs.getInt("first"));
+				hr.setSecond(rs.getInt("second"));
+				hr.setThird(rs.getInt("third"));
+				hr.setTotprize(rs.getInt("totprize"));
+				flist.add(hr);
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

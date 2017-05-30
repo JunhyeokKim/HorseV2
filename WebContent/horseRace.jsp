@@ -79,34 +79,10 @@
 								<td>5번 말</td>
 							</tr>
 							<tr align="center">
-								<td class="horseExplain"><img src="img/goldenHorse.png"
+								<td class="horseExplain"><img src="img/Horse__0.png"
 									class="horseImg img-responsive"><br>
-									<!-- <div class="status  hidden-xs">
-										특징 : 최고속력은 느리지만 적당한 체력과 속력을 지녔습니다. 배당률
-										: 1.8 배
-									</div> --></td>
-								<td class="horseExplain"><img src="img/brownHorse.png"
-									class="img-responsive horseImg "><br>
-									<!-- <div class="status  hidden-xs">
-										특징 : 꾸준히 앞으로<br>나아가는 말입니다.<br>배당률 : 1.9 배
-									</div> --></td>
-								<td class="horseExplain"><img src="img/blackHorse.png"
-									class="img-responsive horseImg"><br>
-									<!-- <div class="status  hidden-xs">
-										특징 : 뒤쳐지지 않고 꾸준히<br>앞으로 달려갑니다<br> 배당률 : 2.0 배<br>
-									</div> --></td>
-								<td class="horseExplain"><img src="img/grayHorse.png"
-									class="img-responsive horseImg"><br>
-									<!-- <div class="status  hidden-xs">
-										특징 : 잘 지치지 않지만<br>치고 나가는<br>속도가 느립니다. <br>배당률 :
-										2.3 배
-									</div> --></td>
-								<td class="horseExplain"><img src="img/whiteHorse.png"
-									class="img-responsive horseImg"><br>
-									<!-- <div class="status  hidden-xs">
-										특징 : 쉽게 쳐지지만<br>나가야 할 때는<br>폭발적으로 달립니다. <br>배당률
-										: 2.5 배
-									</div> --></td>
+									마명 : 
+								</td>
 						</table>
 					</div>
 					<div
