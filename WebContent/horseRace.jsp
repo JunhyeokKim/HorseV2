@@ -1,7 +1,7 @@
 <%@page import="vo.HorseRecord"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.*"%>
-<%@page import="vo.PlayerInfo"%>
+<%@page import="vo.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -31,7 +31,6 @@
 </head>
 <%
 	DAO_PlayerInfo daoP = new DAO_PlayerInfo();
-	DAO_HorseRecord daoR = new DAO_HorseRecord();
 	
 	PlayerInfo vo = (PlayerInfo) session.getAttribute("user");
 	PlayerInfo sch = daoP.checkDuplicatedId(vo.getPid());
@@ -40,6 +39,10 @@
 	ArrayList<PlayerInfo> playerList = daoP.searchPlayer(dump);
 	session.setAttribute("playerList", playerList);
 	session.setAttribute("user", sch);
+	
+	ArrayList<HorseRecord> flist = new DAO_HorseRecord().fiveHorse();
+	System.out.println(flist.size());
+	request.setAttribute("flist", flist);
 %>
 
 
@@ -79,10 +82,20 @@
 								<td>5번 말</td>
 							</tr>
 							<tr align="center">
-								<td class="horseExplain"><img src="img/Horse__0.png"
+							<c:set var="cntt" value="0" />
+							<c:forEach var="hl" items="${flist}">
+							
+								<td class="horseExplain"><img src="img/Horse__${cntt}.png"
 									class="horseImg img-responsive"><br>
-									마명 : 
+									마명 : ${hl.hname}<br>
+									누적 상금 : ${hl.totprize }<br><br>
+									1등 / 2등 / 3등<br>
+									${hl.first} / ${hl.second} / ${hl.third}
 								</td>
+							
+							<c:set var="cntt" value="${cntt+1}" />
+							</c:forEach>
+							</tr>
 						</table>
 					</div>
 					<div

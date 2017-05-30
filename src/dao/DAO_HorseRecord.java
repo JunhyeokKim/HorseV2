@@ -105,8 +105,7 @@ public class DAO_HorseRecord {
 
 	public ArrayList<HorseRecord> fiveHorse(){
 		ArrayList<HorseRecord> flist = new ArrayList<HorseRecord>();
-		String sql = "SELECT * FROM (\n"
-				+ "SELECT * FROM HORSE_RECORD ORDER BY DBMS_RANDOM.RANDOM) WHERE ROWNUM < 6";
+		String sql = "SELECT * FROM (SELECT * FROM HORSE_RECORD ORDER BY DBMS_RANDOM.RANDOM) WHERE ROWNUM <= 5";
 		
 		try {
 			con = AA_Con.conn();
@@ -118,7 +117,6 @@ public class DAO_HorseRecord {
 				hr = new HorseRecord();
 				hr.setHname(rs.getString("hname"));
 				hr.setHnum(rs.getInt("hnum"));
-				hr.setRank(rs.getInt("rank"));
 				hr.setTotrace(rs.getInt("totrace"));
 				hr.setFirst(rs.getInt("first"));
 				hr.setSecond(rs.getInt("second"));
