@@ -36,7 +36,6 @@ public class DAO_HorseInfo {
 				+ "AND FATHER LIKE '%'||?||'%' \n" + "AND MOTHER LIKE '%'||?||'%' \n" + "AND OWNERNAME LIKE '%'||?||'%'"
 				+ "AND TRAINERNAME LIKE '%'||?||'%'"
 				+" AND NO BETWEEN ? AND ? ";
-
 		HorseInfo vo = null;
 		try {
 			con = AA_Con.conn();
@@ -51,10 +50,11 @@ public class DAO_HorseInfo {
 
 			if (rs.next()) {
 				rowCnt = rs.getInt("cnt");
+				System.out.println(rowCnt);
 			}
 
 			con = AA_Con.conn();
-			String whichSql=(rowCnt>20)?sqlBetween:sqlLess;
+			String whichSql=(rowCnt > 20)?sqlBetween:sqlLess;
 			pstmt = con.prepareStatement(whichSql);
 			pstmt.setString(1, sch.getHname());
 			pstmt.setString(2, sch.getGender());

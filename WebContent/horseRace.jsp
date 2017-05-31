@@ -85,7 +85,7 @@
 							<c:set var="cntt" value="0" />
 							<c:forEach var="hl" items="${flist}">
 							
-								<td class="horseExplain" onclick="player[0].hname='${hl.hname}'"><img src="img/Horse__${cntt}.png"
+								<td class="horseExplain" onclick="alloc('${hl.hname}','${hl.hnum }');"><img src="img/Horse__${cntt}.png"
 									class="horseImg img-responsive"><br>
 									마명 : ${hl.hname}<br>
 									누적 상금 : ${hl.totprize }<br><br>
@@ -183,43 +183,52 @@ for (int i=0; i<playerList.size(); i++) {
 	charset="UTF-8"></script>
 <script type="text/javascript">
 	var horseNames=["${flist[0].hname}","${flist[1].hname}","${flist[2].hname}","${flist[3].hname}","${flist[4].hname}"];
+	var horseNums=["${flist[0].hnum}","${flist[1].hnum}","${flist[2].hnum}","${flist[3].hnum}","${flist[4].hnum}"];
 	var player = [ {
 		id : "${user.pid}",
 		curMoney : parseInt('${user.curMoney}'),
 		playerBetMoney : Math.floor(parseInt('${user.curMoney}') / 2),
 		benefit:0,
 		hnum : NaN,
-		hname: ""
+		hname: "",
+		realHorseNum:""
 	}, {
 		id : "${playerList[0].pid}",
 		curMoney : parseInt('${playerList[0].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[0].curMoney}')/4),
 		benefit:0,
 		hnum : NaN,
-		hname: ""
+		hname: "",
+		realHorseNum:""
 	}, {
 		id : "${playerList[1].pid}",
 		curMoney : parseInt('${playerList[1].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[1].curMoney}')/4),
 		benefit:0,
 		hnum : NaN,
-		hname: ""
+		hname: "",
+		realHorseNum:""
 	}, {
 		id : "${playerList[2].pid}",
 		curMoney : parseInt('${playerList[2].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[2].curMoney}')/4),
 		benefit:0,
 		hnum : NaN,
-		hname: ""
+		hname: "",
+		realHorseNum:""
 	}, {
 		id : "${playerList[3].pid}",
 		curMoney : parseInt('${playerList[3].curMoney}'),
 		playerBetMoney :Math.floor(parseInt('${playerList[3].curMoney}')/4),
 		benefit:0,
 		hnum : NaN,
-		hname: ""
+		hname: "",
+		realHorseNum:""
 	} ];
-	
+	function alloc(hname, hnum){
+		player[0].hname=hname;
+		player[0].realHorseNum=hnum;
+	}
 	$(function() {
 		$("#slider").slider({
 			value : player[0].curMoney / 2,

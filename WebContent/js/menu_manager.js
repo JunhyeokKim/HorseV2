@@ -17,6 +17,7 @@ function allocHorse() {
     for (var idx = 1; idx < player.length; idx++) {
         player[idx].hnum = pool[idx - 1];
         player[idx].hname= horseNames[player[idx].hnum-1];
+        player[idx].realHorseNum= horseNums[player[idx].hnum-1];
     }
     $.each(player, function(index, item) {
         console.log(item.id + ": " + item.hnum)
@@ -82,7 +83,7 @@ function start() {
     $("#menus").hide("fade", 1500, init);
     allocHorse();
     $.each(player,function(index,item){
-    	console.log("말 이름 :"+item.hname);
+    	console.log("留� �씠由� :"+item.hname);
     })
 }
 

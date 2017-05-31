@@ -127,16 +127,14 @@
 					<form action="login.jsp">
 						<input type="hidden" name="proc" value="register" />
 						<div class="row">
-							<div class="col-md-offset-2 col-md-5">
+							<div class="col-md-offset-2 col-md-7">
 								<label for="idReg">ID</label>
 							</div>
 							<div>
-								<div class="col-md-5 col-md-offset-2">
+								<div class="col-md-7 col-md-offset-2">
 									<input type="text" class="form-control" id="idReg" name="idReg"
 										placeholder="ID">
 								</div>
-								<button class="btn btn-default col-md-2" type="button"
-									onclick="">중복 확인</button>
 							</div>
 						</div>
 						<div class="row">

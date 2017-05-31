@@ -2,8 +2,8 @@
 <%@page import="org.json.simple.parser.ParseException"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.parser.JSONParser"%>
-<%@page import="vo.PlayerInfo"%>
-<%@page import="dao.DAO_PlayerInfo"%>
+<%@page import="vo.*"%>
+<%@page import="dao.*"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -38,6 +38,7 @@ body {
 </style>
 <%
 	DAO_PlayerInfo dao = new DAO_PlayerInfo();
+	DAO_HorseRecord daoH = new DAO_HorseRecord();
 
 	String result = (request.getParameter("result") != null) ? request.getParameter("result") : "";
 	System.out.println("result: " + result);
@@ -48,7 +49,6 @@ body {
 		//books의 배열을 추출
 		JSONArray playerArray = (JSONArray) jsonObject.get("playersInfo");
 %>
-playerArray.get
 
 <body>
 	<%-- <h1><%=playerObject.get("id")%></h1>
@@ -56,17 +56,17 @@ playerArray.get
 	<h1><%=playerObject.get("playerBetMoney")%></h1>
 	<h1><%=playerObject.get("hnum")%></h1> --%>
 	<%
-	PlayerInfo upt = new PlayerInfo();
-	JSONObject winnerObj = (JSONObject) playerArray.get(0);
-	
+		PlayerInfo upt = new PlayerInfo();
+			HorseRecord hr = new HorseRecord();
+			JSONObject winnerObj = (JSONObject) playerArray.get(0);
 	%>
 	<br>
 	<h1>Game Result</h1>
 	<br>
-	
+
 	<table class="table">
 		<tr>
-		<td></td>
+			<td></td>
 			<td>ID</td>
 			<td>Betting money</td>
 			<td>수익</td>
@@ -83,35 +83,48 @@ playerArray.get
 					upt.setPid((String) playerObject.get("id"));
 					upt.setCurMoney(Double.parseDouble(playerObject.get("curMoney").toString()));
 					dao.updatePlayer(upt, 2);
-			}
-		for(int i=0; i<playerArray.size(); i++){
-			JSONObject playerObject = (JSONObject) playerArray.get(i);
-			PlayerInfo vo= new PlayerInfo();
-			vo.setPid(playerObject.get("id").toString());
+
+				}
+				for (int i = 0; i < playerArray.size(); i++) {
+					JSONObject playerObject = (JSONObject) playerArray.get(i);
+					PlayerInfo vo = new PlayerInfo();
+					vo.setPid(playerObject.get("id").toString());
 		%>
 		<tr>
 			<td>
 				<%
-					if (i < 3) {
-				%> <img src="img/<%=i%>.png" class="medal hidden-xs">
-				<%
-					}
-				%><td><%=playerObject.get("id")%></td>
-				<td><%=playerObject.get("playerBetMoney")%></td>
+					HorseRecord hrr = new HorseRecord();
+					if (i < 3){
+								int realNum=Integer.parseInt(playerObject.get("realHorseNum").toString());
+								System.out.println("real horse: "+realNum);
+								hrr.setHnum(realNum);
+								String param = (i == 0) ? "FIRST" : ((i == 1) ? "SECOND" : "THIRD");
+								System.out.println("param: "+param);
+								daoH.updateHorse(hrr, param);
+				%> <img src="img/<%=i%>.png" class="medal hidden-xs"> <%
+ 	} else {
+ 		int realNum=Integer.parseInt(playerObject.get("realHorseNum").toString());
+ 		hrr.setHnum(realNum);
+ 		daoH.updateHorse(hrr);
+ 	}
+ %>
+			
+			<td><%=playerObject.get("id")%></td>
+			<td><%=playerObject.get("playerBetMoney")%></td>
 			<td><%=playerObject.get("benefit")%></td>
 			<td><%=playerObject.get("curMoney")%></td>
 			<td><%=dao.getOnePlayer(vo).getRank()%></td>
 		</tr>
 		<%
 			}
-
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		%>
 	</table>
-	<button type="button" class="btn btn-primary btn-lg" onclick=window.location.reload()>다시 하기</button>
+	<button type="button" class="btn btn-primary btn-lg"
+		onclick=window.location.reload()>다시 하기</button>
 </body>
 <script src="http://code.jquery.com/jquery-1.10.2.js?ver=1 "></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js?ver=1"></script>

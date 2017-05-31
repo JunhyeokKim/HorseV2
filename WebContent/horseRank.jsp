@@ -87,7 +87,7 @@ body {
 			<!-- Default panel contents -->
 			<div class="panel-heading"
 				style="font-weight: bold; font-family: HY견고딕" align="center">
-				<h4>경주마 정보</h4>
+				<h4>경주마 순위</h4>
 			</div>
 			<!-- Table -->
 			<table class="table">
@@ -99,7 +99,6 @@ body {
 					<th>1등 횟수</th>
 					<th>2등 횟수</th>
 					<th>3등 횟수</th>
-					<th>총 획득 상금</th>
 				</tr>
 				<c:forEach var="horseList" items="${hrList}" varStatus="sts">
 					<tr>
@@ -110,7 +109,6 @@ body {
 						<td>${horseList.first }</td>
 						<td>${horseList.second }</td>
 						<td>${horseList.third }</td>
-						<td>${horseList.totprize }</td>
 					</tr>
 				</c:forEach>
 			</table>
