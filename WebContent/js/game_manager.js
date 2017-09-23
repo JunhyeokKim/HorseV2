@@ -8,7 +8,7 @@ var gameOver = false; // is the game finished?
 var winner; // winner number
 var iflag = true; // is the game finished? - 2
 var mStatus = 0; // mini horse statue
-var endDistance = 10; // end condition of game (distance)
+var endDistance = 1000; // end condition of game (distance)
 var elapsedTime = 0;
 var frame=50;
 

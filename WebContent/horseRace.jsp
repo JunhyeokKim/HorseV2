@@ -177,7 +177,7 @@ for (int i=0; i<playerList.size(); i++) {
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap-toggle.min.js"></script>
-<script type="text/javascript" src="js/game_manager.js?ver=3"
+<script type="text/javascript" src="js/game_manager.js"
 	charset="UTF-8"></script>
 <script type="text/javascript" src="js/menu_manager.js?ver=4"
 	charset="UTF-8"></script>

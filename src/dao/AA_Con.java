@@ -8,10 +8,10 @@ public class AA_Con {
 	
 	private static Connection con;
 	private static String dirver = "oracle.jdbc.driver.OracleDriver";
-	private static String conInfo = "jdbc:oracle:thin:@192.168.0.110:1522:orcl";
-	//private static String conInfo = "jdbc:oracle:thin:@localhost:1521:orcl";
-	private static String did = "tiger";
-	private static String dpw = "scott";
+	
+	private static String conInfo = "jdbc:oracle:thin:@localhost:1521:orcl";
+	private static String did = "scott";
+	private static String dpw = "tiger";
 	
 	public static Connection conn() throws ClassNotFoundException, SQLException{
 		Class.forName(dirver);
@@ -19,4 +19,5 @@ public class AA_Con {
 		System.out.println("정상 접속 성공!!");
 		return con;
 	}
+	
 }
